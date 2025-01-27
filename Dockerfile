@@ -1,7 +1,7 @@
 # use alpine as base image
 FROM alpine:3.21.2 as build-env
 # install build-base meta package inside build-env container
-RUN apk add --no-cache build-base=0.5r3
+RUN apk add --no-cache build-base=0.5-r3
 # change directory to /app
 WORKDIR /app
 # copy all files from current directory inside the build-env container

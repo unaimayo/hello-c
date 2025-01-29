@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: hello-c
+    app.kubernetes.io/component: web
+    app.kubernetes.io/instance: hello-c
+    app.kubernetes.io/name: hello-c
+    app.kubernetes.io/part-of: hello-c
+    app.openshift.io/runtime: java
+  name: hello-c
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-c
+  template:
+    metadata:
+      labels:
+        app: hello-c
+    spec:
+      containers:
+      - name: hello-c
+        imagePullPolicy: Always
+        image: es.icr.io/bde_poc/hello-c:latest
+        livenessProbe:
+          exec:
+            command:
+            - ls
+            - /app/hello
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - ls
+            - /app/hello
+          initialDelaySeconds: 5
+          periodSeconds: 5
